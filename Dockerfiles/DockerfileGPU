@@ -1,0 +1,29 @@
+# Use a GPU-enabled base image
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
+
+# Set up a non-root user
+RUN useradd -m -U appuser
+
+# Install essential packages and cleanup
+USER root
+RUN apt-get update && apt-get install -y \
+    wget libssl-dev libffi-dev cmake \
+    libnuma-dev pkgconf libbz2-dev && \
+    apt-get clean libturbojpeg
+
+# Switch to the non-root user
+USER appuser
+
+# Install requirements
+WORKDIR /app
+
+COPY --chown=appuser:appuser requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=appuser:appuser src/ src/
+COPY --chown=appuser:appuser .env .
+COPY --chown=appuser:appuser README.md .
+COPY --chown=appuser:appuser setup.py .
+COPY --chown=appuser:appuser configs/ configs/
+RUN pip install --no-cache-dir .
+
+ENTRYPOINT ["/bin/bash"]

@@ -1,0 +1,65 @@
+[tool.black]
+target-version = ["py310"]
+line-length = 120
+
+[tool.usort.known]
+first_party = ['src']
+
+[tool.pylint]
+max-args = 6
+max-line-length = 120
+good-names = ["i", "B", "C", "H", "W", "r", "g", "b"]
+generated-members = 'numpy.* , torch.* , cv2.* , ffmpeg.*, av.*'
+
+[tool.mypy]
+
+# When set to `false`, it disallows variable type redefinitions. This means that you can't change the type of a variable once it's been defined.
+allow_redefinition = false
+
+# When `true`, it makes sure that functions without type annotations are still checked.
+check_untyped_defs = true
+
+# When set to `false`, it allows explicit Any types. The Any type in mypy is a way of opting out of type-checking, so this setting is about whether you can explicitly specify it.
+disallow_any_explicit = true
+
+# When `true`, it disallows usage of generic types without concrete parameters. E.g. List without a specific type like List[int].
+disallow_any_generics = true
+
+# If `true`, it disallows calls to functions that do not have type annotations.
+disallow_untyped_calls = true
+
+# If `true`, it disallows defining decorators without type annotations.
+disallow_untyped_decorators = true
+
+# If set to `false`, it doesn't ignore errors. If set to `true`, it would mean mypy won't report any errors.
+ignore_errors = false
+
+# If `true`, it won't report errors when third-party library stubs are missing. It's a useful setting to avoid errors when using libraries that don't have type annotations.
+ignore_missing_imports = true
+
+# If `false`, it doesn't allow implicit re-exporting. If you import something in a module and don't use it, it won't be available for other modules importing from your module.
+implicit_reexport = false
+
+# If `true`, it allows the use of local (i.e., within-function) partial types to be inferred.
+local_partial_types = true
+
+# When `true`, it treats None as a distinct type and requires explicit Optional when something could be None. This avoids some common pitfalls with None-related bugs.
+no_implicit_optional = true
+
+# When `true`, it gives an error when comparing items of incompatible types.
+strict_equality = true
+
+# When `true`, it enforces strict optional checking, meaning that mypy will complain about operations that might be performed on a None value.
+strict_optional = true
+
+# If `true`, warns when a function doesn't explicitly return in all paths.
+warn_no_return = true
+
+# If `true`, it warns about redundant casts, i.e., type casts that are unnecessary.
+warn_redundant_casts = true
+
+# If `true`, warns about code paths that will never be executed.
+warn_unreachable = true
+
+# If `true`, it will warn you about configuration flags you have set that are not being used by mypy.
+warn_unused_configs = true

@@ -1,0 +1,50 @@
+project_name: 'PlanetClassifier'
+experiment_name: 'main_experiment'
+num_classes: 17
+max_steps: 10000
+accelerator: 'gpu'
+monitor_metric: 'val_f1'
+monitor_mode: 'max'
+progress_bar_refresh_rate: 10
+precision: 16
+dotenv_path: '.env'
+
+net_kwargs:
+  model_name: 'resnet18'
+  pretrained: true
+
+optimizer: 'torch.optim.AdamW'
+optimizer_kwargs:
+  lr: 1e-3
+  weight_decay: 1e-5
+
+scheduler: 'torch.optim.lr_scheduler.CosineAnnealingLR'
+scheduler_kwargs:
+  T_max: 10000
+  eta_min: 1e-5
+
+losses:
+  - name: 'bce'
+    weight: 1.0
+    loss_fn: 'torch.nn.BCEWithLogitsLoss'
+    loss_kwargs: {}
+
+base_data_settings:
+  data_path: "./data"
+  batch_size: 128
+  num_workers: 0
+  train_size: 0.8
+
+transforms_settings:
+  width: 224
+  height: 224
+  preprocessing: True
+  augmentations: True
+  postprocessing: True
+  flip_probability: 0.5
+  brightness_limit: 0.2
+  contrast_limit: 0.2
+  hue_shift_limit: 20
+  sat_shift_limit: 30
+  val_shift_limit: 20
+  blur_probability: 0.5

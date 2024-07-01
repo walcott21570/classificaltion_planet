@@ -1,0 +1,100 @@
+config: !!python/object:src.settings.config.Config
+  __dict__:
+    accelerator: gpu
+    base_data_settings: !!python/object:src.settings.config.DataConfig
+      __dict__:
+        batch_size: 128
+        data_path: ./data
+        num_workers: 0
+        train_size: 0.8
+      __pydantic_extra__: null
+      __pydantic_fields_set__: !!set
+        batch_size: null
+        data_path: null
+        num_workers: null
+        train_size: null
+      __pydantic_private__: null
+    dotenv_path: .env
+    experiment_name: main_experiment
+    losses:
+    - !!python/object:src.settings.config.LossConfig
+      __dict__:
+        loss_fn: torch.nn.BCEWithLogitsLoss
+        loss_kwargs: {}
+        name: bce
+        weight: 1.0
+      __pydantic_extra__: null
+      __pydantic_fields_set__: !!set
+        loss_fn: null
+        loss_kwargs: null
+        name: null
+        weight: null
+      __pydantic_private__: null
+    max_steps: 10000
+    monitor_metric: val_f1
+    monitor_mode: max
+    net_kwargs:
+      model_name: resnet18
+      pretrained: true
+    num_classes: 17
+    optimizer: torch.optim.AdamW
+    optimizer_kwargs:
+      lr: 0.001
+      weight_decay: 1.0e-05
+    precision: 16
+    progress_bar_refresh_rate: 10
+    project_name: PlanetClassifier
+    scheduler: torch.optim.lr_scheduler.CosineAnnealingLR
+    scheduler_kwargs:
+      T_max: 10000
+      eta_min: 1.0e-05
+    transforms_settings: !!python/object:src.settings.config.TransformsConfig
+      __dict__:
+        augmentations: true
+        blur_probability: 0.5
+        brightness_limit: 0.2
+        contrast_limit: 0.2
+        flip_probability: 0.5
+        height: 224
+        hue_shift_limit: 20
+        postprocessing: true
+        preprocessing: true
+        sat_shift_limit: 30
+        val_shift_limit: 20
+        width: 224
+      __pydantic_extra__: null
+      __pydantic_fields_set__: !!set
+        augmentations: null
+        blur_probability: null
+        brightness_limit: null
+        contrast_limit: null
+        flip_probability: null
+        height: null
+        hue_shift_limit: null
+        postprocessing: null
+        preprocessing: null
+        sat_shift_limit: null
+        val_shift_limit: null
+        width: null
+      __pydantic_private__: null
+  __pydantic_extra__: null
+  __pydantic_fields_set__: !!set
+    accelerator: null
+    base_data_settings: null
+    dotenv_path: null
+    experiment_name: null
+    losses: null
+    max_steps: null
+    monitor_metric: null
+    monitor_mode: null
+    net_kwargs: null
+    num_classes: null
+    optimizer: null
+    optimizer_kwargs: null
+    precision: null
+    progress_bar_refresh_rate: null
+    project_name: null
+    scheduler: null
+    scheduler_kwargs: null
+    transforms_settings: null
+  __pydantic_private__: null
